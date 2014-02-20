@@ -23,14 +23,39 @@
 
 %hook SBTodayViewController
 
+
+// TODO: look for insertion of widget, then, after %orig, find that widget's associated view properties (must exist somewhere down there), and add the nextAlarmView to it. Set tap properties and all that to the MobileTimer framework's options.
+
 -(void)commitInsertionOfBulletin:(id)bulletin beforeBulletin:(id)bulletin2 inSection:(id)section forFeed:(unsigned)feed{
-	
 	%orig();
 
-	NSLog(@"[Tranquil] Listening to insertion, bulletin is: %@, section is: %@, section name is: %@", bulletin, section, [section identifier]);
+	if([[section identifier] isEqualToString:@"com.apple.mobiletimer"]){
+		NSLog(@"[Tranquil] Detected insertion of Alarm widget, adding alarm subview...");
 
-	if([[section identifier] isEqualToString:@"com.apple.mobiletimer"])
-		 [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TQAddClock" object:nil userInfo:@{@"bulletin" : bulletin}];
+		Alarm *nextAlarm = [[%c(AlarmManager) sharedManager] nextAlarmForDate:[NSDate date] activeOnly:YES allowRepeating:YES];
+		NSLog(@"[Tranquil / DEBUG] All alarms: %@, identifiter: %@, next alarm: %@", [[%c(AlarmManager sharedManager)] alarms], [bulletin identifier], nextAlarm);
+
+		AlarmView *nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), 100.0)];
+
+		NSString *days = [nextAlarm repeats] ? @"" : nil;
+		if(days){
+			NSArray *repeatDays = [nextAlarm repeatDays];
+			for(int i = 0; i < repeatDays.count; i++){
+				if(i < repeatDays.count - 1)
+					days = [days stringByAppendingString:@"%@, ", repeatDays[i]];
+
+				else
+					days = [days stringByAppendingString:repeatDays[i]];
+			}
+		}
+
+		[nextAlarmView setName:MSHookIvar<NSString *>(nextAlarm, "_title") andRepeatText:days textColor:[UIColor colorWithWhite:0.9 alpha:0.9]];
+		[[nextAlarmView timeLabel] setHour:[nextAlarm hour] minute:[nextAlarm minute]];
+		[[nextAlarmView enabledSwitch] setOn:YES];
+
+		[self.view addSubview:nextAlarmView];
+		//[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"TQAddClock" object:nil userInfo:@{@"bulletin" : bulletin}];
+	}
 }
 
 %end
