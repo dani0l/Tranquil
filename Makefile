@@ -5,8 +5,9 @@ include theos/makefiles/common.mk
 
 TWEAK_NAME = Tranquil
 Tranquil_FILES = $(wildcard *.xm)
-Traunquil_FRAMEWORKS = Foundation UIKit QuartzCore
-Traunquil_PRIVATE_FRAMEWORKS = MobileTimer
+Tranquil_FRAMEWORKS = Foundation UIKit QuartzCore CoreGraphics
+Tranquil_PRIVATE_FRAMEWORKS = MobileTimer
+Tranquil_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 

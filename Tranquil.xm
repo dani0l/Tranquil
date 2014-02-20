@@ -34,18 +34,17 @@ static char * kTranquilMobileTimerKey;
 		objc_setAssociatedObject(self, &kTranquilMobileTimerKey, @(YES), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
 		Alarm *nextAlarm = [[%c(AlarmManager) sharedManager] nextAlarmForDate:[NSDate date] activeOnly:YES allowRepeating:YES];
-		NSLog(@"[Tranquil / DEBUG] All alarms: %@, next alarm: %@", [[%c(AlarmManager sharedManager)] alarms], nextAlarm);
+		NSLog(@"[Tranquil / DEBUG] All alarms: %@, next alarm: %@", [[%c(AlarmManager) sharedManager] alarms], nextAlarm);
 
-		AlarmView *nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:CGRectMake(CGRectGetMinX(cell.frame), CGRectGetHeight(cell.frame), CGRectGetWidth(self.view.frame), kTranquilHeightValue)];
-		info.preferredViewSize += kTranquilHeightValue;
-		nextAlarmView.tag = 5451;
+		AlarmView *nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:CGRectMake(CGRectGetMinX(cell.frame), CGRectGetHeight(cell.frame), CGRectGetWidth(cell.frame), kTranquilHeightValue)];
+		info.preferredViewSize = CGSizeMake(info.preferredViewSize.width, info.preferredViewSize.height + kTranquilHeightValue);
 
 		NSString *days = [nextAlarm repeats] ? @"" : nil;
 		if(days){
 			NSArray *repeatDays = [nextAlarm repeatDays];
 			for(int i = 0; i < repeatDays.count; i++){
 				if(i < repeatDays.count - 1)
-					days = [days stringByAppendingString:@"%@, ", repeatDays[i]];
+					days = [days stringByAppendingString:[NSString stringWithFormat:@"%@, ", repeatDays[i]]];
 
 				else
 					days = [days stringByAppendingString:repeatDays[i]];
@@ -53,11 +52,12 @@ static char * kTranquilMobileTimerKey;
 		}
 
 		[nextAlarmView setName:MSHookIvar<NSString *>(nextAlarm, "_title") andRepeatText:days textColor:[UIColor colorWithWhite:0.9 alpha:0.9]];
-		[[nextAlarmView timeLabel] setHour:[nextAlarm hour] minute:[nextAlarm minute]];
+		[[nextAlarmView timeLabel] setDate:[nextAlarm nextFireDate]];
 		[[nextAlarmView enabledSwitch] setOn:YES];
+		nextAlarmView.tag = 5451;
 
 		CGRect expanded = cell.frame;
-		expanded.size.height = CGRectGetHeight(expanded) + CGRectGetHeight(nextAlarmView);
+		expanded.size.height = CGRectGetHeight(expanded) + CGRectGetHeight(nextAlarmView.frame);
 		[cell setFrame:expanded];
 		[cell addSubview:nextAlarmView];
 	}

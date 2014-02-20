@@ -1,4 +1,6 @@
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface NSDistributedNotificationCenter : NSNotificationCenter
 @end
@@ -351,7 +353,7 @@
 @property(readonly) NSString * timeDesignator;
 @property(readonly) BOOL timeDesignatorAppearsBeforeTime;
 @property(readonly) UIFont * timeDesignatorFont;
-@property(readonly) struct CGSize { float x1; float x2; } timeDesignatorSize;
+@property(readonly) CGSize timeDesignatorSize;
 @property double timeInterval;
 @property(readonly) BOOL use24HourTime;
 
@@ -364,31 +366,31 @@
 + (id)defaultFont;
 + (id)pmString;
 
-- (id)_calendar;
-- (id)_dateString;
-- (id)_dateWithDayDiffFromToday:(int)arg1;
+- (NSCalendar *)_calendar;
+- (NSString *)_dateString;
+- (NSDate *)_dateWithDayDiffFromToday:(int)arg1;
 - (void)_didUpdateDate;
-- (struct CGSize { float x1; float x2; })_intrinsicSizeWithinSize:(struct CGSize { float x1; float x2; })arg1;
+- (CGSize)_intrinsicSizeWithinSize:(CGSize)arg1;
 - (double)_lastWeek;
 - (double)_noon;
 - (void)_recomputeTextIfNecessary;
 - (id)_stringDrawingContext;
 - (double)_today;
-- (id)_todayDate;
+- (NSDate *)_todayDate;
 - (double)_tomorrow;
 - (double)_yesterday;
 - (BOOL)boldForAllLocales;
-- (id)date;
+- (NSDate *)date;
 - (void)dealloc;
 - (void)drawRect:(CGRect)arg1;
 - (void)drawTextInRect:(CGRect)arg1;
-- (id)font;
+- (UIFont *)font;
 - (BOOL)forceTimeOnly;
 - (id)initWithFrame:(CGRect)arg1;
 - (void)invalidate;
 - (float)paddingFromTimeToDesignator;
 - (void)setBoldForAllLocales:(BOOL)arg1;
-- (void)setDate:(id)arg1;
+- (void)setDate:(NSDate *)arg1;
 - (void)setForceTimeOnly:(BOOL)arg1;
 - (void)setPaddingFromTimeToDesignator:(float)arg1;
 - (void)setShouldRecomputeText:(BOOL)arg1;
@@ -398,18 +400,14 @@
 - (id)text;
 - (id)timeDesignator;
 - (BOOL)timeDesignatorAppearsBeforeTime;
-- (id)timeDesignatorFont;
+- (UIFont *)timeDesignatorFont;
 - (CGSize)timeDesignatorSize;
 - (double)timeInterval;
 - (BOOL)use24HourTime;
 
 @end
 
-@interface ShrinkableDateLabel : UIDateLabel {
-    UIFont *_timeDesignatorFont;
-}
-
-@property(retain) UIFont *timeDesignatorFont;
+@interface ShrinkableDateLabel : UIDateLabel
 - (void)dealloc;
 - (void)setTimeDesignatorFont:(id)arg1;
 - (void)shrinkFontsToFitWidth:(float)arg1;
@@ -418,7 +416,6 @@
 
 @interface DigitalClockLabel : ShrinkableDateLabel {
     NSDate *_baseDate;
-    NSCalendar *_calendar;
     int _hour;
     int _minute;
 }
