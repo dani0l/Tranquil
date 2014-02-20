@@ -20,13 +20,79 @@
 */
 
 #import "Tranquil.h"
+#define kTranquilHeightValue 100.0
 
+%hook SBWidgetBulletinCell
+static char * kTranquilMobileTimerKey;
+
+- (id)initWithStyle:(int)style reuseIdentifier:(id)identifier {
+	SBWidgetBulletinCell *cell = %orig();
+	SBBBWidgetBulletinInfo *info = [cell representedWidgetBulletinInfo];
+
+	NSLog(@"[Tranquil] Detected creation of MobileTimer widget (%@) with info: %@, adding Alarm subview...", cell, info);
+	if([[info identifier] isEqualToString:@"com.apple.mobiletimer"]){
+		objc_setAssociatedObject(self, &kTranquilMobileTimerKey, @(YES), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+		Alarm *nextAlarm = [[%c(AlarmManager) sharedManager] nextAlarmForDate:[NSDate date] activeOnly:YES allowRepeating:YES];
+		NSLog(@"[Tranquil / DEBUG] All alarms: %@, next alarm: %@", [[%c(AlarmManager sharedManager)] alarms], nextAlarm);
+
+		AlarmView *nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:CGRectMake(CGRectGetMinX(cell.frame), CGRectGetHeight(cell.frame), CGRectGetWidth(self.view.frame), kTranquilHeightValue)];
+		info.preferredViewSize += kTranquilHeightValue;
+		nextAlarmView.tag = 5451;
+
+		NSString *days = [nextAlarm repeats] ? @"" : nil;
+		if(days){
+			NSArray *repeatDays = [nextAlarm repeatDays];
+			for(int i = 0; i < repeatDays.count; i++){
+				if(i < repeatDays.count - 1)
+					days = [days stringByAppendingString:@"%@, ", repeatDays[i]];
+
+				else
+					days = [days stringByAppendingString:repeatDays[i]];
+			}
+		}
+
+		[nextAlarmView setName:MSHookIvar<NSString *>(nextAlarm, "_title") andRepeatText:days textColor:[UIColor colorWithWhite:0.9 alpha:0.9]];
+		[[nextAlarmView timeLabel] setHour:[nextAlarm hour] minute:[nextAlarm minute]];
+		[[nextAlarmView enabledSwitch] setOn:YES];
+
+		CGRect expanded = cell.frame;
+		expanded.size.height = CGRectGetHeight(expanded) + CGRectGetHeight(nextAlarmView);
+		[cell setFrame:expanded];
+		[cell addSubview:nextAlarmView];
+	}
+
+	else{
+		if([cell viewWithTag:5451])
+			[[cell viewWithTag:5451] removeFromSuperview];
+
+		objc_setAssociatedObject(self, &kTranquilMobileTimerKey, @(NO), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	}
+
+	return cell;
+}
+
+- (float)heightForReusableViewInTableView:(id)tableView {
+	if([objc_getAssociatedObject(self, &kTranquilMobileTimerKey) boolValue])
+		return %orig() + kTranquilHeightValue;
+
+	return %orig();
+}
+
+- (void)populateReusableView:(id)view {
+	%orig();
+}
+
+%end
+
+/*
 %hook SBTodayViewController
-
 
 // TODO: look for insertion of widget, then, after %orig, find that widget's associated view properties (must exist somewhere down there), and add the nextAlarmView to it. Set tap properties and all that to the MobileTimer framework's options.
 
--(void)commitInsertionOfBulletin:(id)bulletin beforeBulletin:(id)bulletin2 inSection:(id)section forFeed:(unsigned)feed{
+- (void)
+
+- (void)commitInsertionOfBulletin:(id)bulletin beforeBulletin:(id)bulletin2 inSection:(id)section forFeed:(unsigned)feed{
 	%orig();
 
 	if([[section identifier] isEqualToString:@"com.apple.mobiletimer"]){
@@ -58,4 +124,4 @@
 	}
 }
 
-%end
+%end*/
