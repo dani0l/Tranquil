@@ -22,15 +22,35 @@
 #import "Tranquil.h"
 #define kTranquilHeightValue 100.0
 
+
+/*
+%hook UIView
+
+CGFloat timey;
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+	if(%orig != nil && event.timestamp - timey > 2){
+		timey = event.timestamp;
+		NSLog(@"---=-=-=-=- detected hit on %@ wth sub %@ sna subp %@", %orig, %orig.subviews, %orig.superview);
+	}
+	return %orig();
+}
+
+%end*/
+
+SBTodayViewController - > SBBulletinObserverViewController - > self.SBBulletinViewController - > - (BOOL)_insertBulletin:(id)bulletin atIndex:(unsigned)index inSection:(id)section;.... tableView!
+
 %hook SBWidgetBulletinCell
-static char * kTranquilMobileTimerKey;
+//static char * kTranquilMobileTimerKey;
 
+//-[<SBWidgetBulletinCell: 0x140029450> initWithStyle:0 reuseIdentifier:SBBBWidgetBulletinInfo]
 - (id)initWithStyle:(int)style reuseIdentifier:(id)identifier {
-	SBWidgetBulletinCell *cell = %orig();
-	SBBBWidgetBulletinInfo *info = [cell representedWidgetBulletinInfo];
+	SBTodayBulletinCell *cell = %orig();
 
-	NSLog(@"[Tranquil] Detected creation of MobileTimer widget (%@) with info: %@, adding Alarm subview...", cell, info);
-	if([[info identifier] isEqualToString:@"com.apple.mobiletimer"]){
+	NSLog(@"[Tranquil] Detected creation of MobileTimer widget (%@) with info: %@, adding Alarm subview...", cell, [cell labelText]);
+	for(UIView *v in cell.subviews)
+		NSLog(@"------ foundee %@ with %@", v, v.subviews);
+
+	/*if([[info identifier] isEqualToString:@"com.apple.mobiletimer"]){
 		objc_setAssociatedObject(self, &kTranquilMobileTimerKey, @(YES), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
 		Alarm *nextAlarm = [[%c(AlarmManager) sharedManager] nextAlarmForDate:[NSDate date] activeOnly:YES allowRepeating:YES];
@@ -68,20 +88,10 @@ static char * kTranquilMobileTimerKey;
 
 		objc_setAssociatedObject(self, &kTranquilMobileTimerKey, @(NO), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 	}
-
+*/
 	return cell;
 }
 
-- (float)heightForReusableViewInTableView:(id)tableView {
-	if([objc_getAssociatedObject(self, &kTranquilMobileTimerKey) boolValue])
-		return %orig() + kTranquilHeightValue;
-
-	return %orig();
-}
-
-- (void)populateReusableView:(id)view {
-	%orig();
-}
 
 %end
 

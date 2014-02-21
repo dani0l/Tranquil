@@ -229,6 +229,21 @@
 - (id)widgetIdentifier;
 @end
 
+@interface SBTodayBulletinCell : UITableViewCell {
+	UILabel *_label;
+	UIImageView *_iconImageView;
+}
+@property(copy, nonatomic) NSString *labelText;
+@property(assign, nonatomic) CGRect textRect;
++ (id)defaultFont;
++ (id)defaultFontColor;
++ (id)defaultTextAttributes;
+- (id)initWithStyle:(int)style reuseIdentifier:(id)identifier;
+- (void)dealloc;
+- (void)layoutSubviews;
+- (void)setIcon:(id)icon;
+@end
+
 @interface SBWidgetBulletinCell : UITableViewCell {
 	SBBBWidgetBulletinInfo *_representedWidgetBulletinInfo;
 }
