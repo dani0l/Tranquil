@@ -1,15 +1,18 @@
-THEOS_PACKAGE_DIR_NAME = debs
+THEOS_BUILD_DIR = debs
 TARGET =: clang
-ARCHS = armv7 arm64
+ARCHS = armv7 armv7s arm64
+
 include theos/makefiles/common.mk
 
-TWEAK_NAME = Tranquil
-Tranquil_FILES = $(wildcard *.xm)
-Tranquil_FRAMEWORKS = Foundation UIKit QuartzCore CoreGraphics
+BUNDLE_NAME = Tranquil
+Tranquil_FILES = TranquilViewController.m TouchFix/TouchFix.m TranquilViewControllerNew.m TranquilView.xm
+Tranquil_FRAMEWORKS = Foundation UIKit CoreGraphics
 Tranquil_PRIVATE_FRAMEWORKS = MobileTimer
+Tranquil_INSTALL_PATH = /System/Library/WeeAppPlugins
+Tranquil_LDFLAGS = -weak_library $(TARGET_PRIVATE_FRAMEWORK_PATH)/SpringBoardUIServices.framework/SpringBoardUIServices
 Tranquil_CFLAGS = -fobjc-arc
 
-include $(THEOS_MAKE_PATH)/tweak.mk
+include $(THEOS_MAKE_PATH)/bundle.mk
 
-internal-after-install::
+after-install::
 	install.exec "killall -9 backboardd"
