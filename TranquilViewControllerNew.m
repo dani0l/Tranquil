@@ -22,7 +22,7 @@
 
 - (instancetype)init {
     self = [super init];
-    
+
 	if (self) {
         self.bundle = [NSBundle bundleForClass:[self class]];
 	}
@@ -39,18 +39,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
 }
 
-
+// Notification Center was closed
 - (void)hostDidDismiss {
     [super hostDidDismiss];
-	//Notification Center was closed
 }
 
+// Notification Center was opened
 - (void)hostDidPresent {
+    [selfView loadFullView];
 	[super hostDidPresent];
-	//Notification Center was opened
 }
 
 @end

@@ -1,6 +1,7 @@
 Package: com.insanj.tranquil
 Name: Tranquil
-Depends: firmware (>= 7.0)
+Pre-Depends: firmware (>= 7.0)
+Depends: mobilesubstrate
 Version: 0.1
 Architecture: iphoneos-arm
 Description: A more helpful Alarm reminder.

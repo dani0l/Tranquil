@@ -43,10 +43,44 @@
     }
 }
 
-// Load views to display in parent view (which is a child to ViewController)
+// Load views to display in parent view (which is a child to ViewController),
+// called manually from TranquilViewControllerNew.
 - (void)loadFullView {
-    _nextAlarm = [[%c(AlarmManager) sharedManager] nextAlarmForDate:[NSDate date] activeOnly:YES allowRepeating:YES];
 
+    // Since this method is called every time the NC is revealed, we should clean
+    // up after ourselves (ARC prevents a lot of garbage).
+    if (_nextAlarmView) {
+        [_nextAlarmView removeFromSuperview];
+    }
+
+    // Because AlarmManager is not a godly singleton that holds all the answers,
+    // my solution is to read from the saved preferences file that lists all
+    // the Alarms in a simply array format.
+    NSArray *alarms = [%c(AlarmManager) copyReadAlarmsFromPreferences];
+    NSLog(@"[Tranquil] Loading widget into NC, read alarms from preferences: %@", alarms);
+    if (!alarms) {    // Of course, if there are no alarms existing...
+        return;
+    }
+
+    _nextAlarm = [alarms firstObject];
+    NSLog(@"[Tranquil] First read alarm object (control) set as: %@", _nextAlarm);
+
+    // Now we cycle through the preferences-read alarms to find the next alarm
+    // which is already active. A simple cycript inspection yields that this array
+    // is already sorted chronologically from midnight.
+    for (Alarm *a in [alarms objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, alarms.count - 1)]]) {
+        if ([a isActive] && [_nextAlarm.nextFireDate compare:a.nextFireDate] == NSOrderedDescending) {
+
+
+    for (Alarm *a in alarms) {
+        if ([a isActive]) {
+            _nextAlarm = [alarms firstObject];
+            break;
+        }
+    }
+
+    // Now that we presumably have a valid Alarm instance, it's time to create
+    // a standard view for it, and load it in with essential elements.
     _nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:self.bounds];
 
     // Time Label (10:30 AM)
@@ -64,7 +98,9 @@
 
     NSLog(@"[Tranquil] Created an AlarmView (%@) using the properties set in the next Alarm (%@). Our recursive view hierachy is currently: %@", _nextAlarmView, _nextAlarm, [_nextAlarmView recursiveDescription]);
 
-/*
+/* Scraps...
+
+
     DigitalClockLabel *nextAlarmDigitalLabel = [[%c(DigitalClockLabel) alloc] initWithFrame:CGRectMake(0.0, 0.0, _nextAlarmView.frame.size.width / 2.0, (3.0 * _nextAlarmView.frame.size.height) / 4.0)];
 
   NSString *days = [nextAlarm repeats] ? @"" : nil;
