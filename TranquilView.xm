@@ -51,6 +51,7 @@
     // Since this method is called every time the NC is revealed, we should clean
     // up after ourselves (ARC prevents a lot of garbage).
     if (_nextAlarmView) {
+        _nextAlarm = nil;
         [_nextAlarmView removeFromSuperview];
     }
 
@@ -59,10 +60,9 @@
     spinner.center = self.center;
     [self addSubview:spinner];*/
 
-    // TODO: Find a way to pull most recent Alarms if they are changed...
-    CFPreferencesAppSynchronize(CFSTR("com.apple.mobiletimer"));
-    AlarmManager *manager = [%c(AlarmManager) sharedManager];
-    [manager loadAlarms];
+    //CFPreferencesAppSynchronize(CFSTR("com.apple.mobiletimer"));
+    //AlarmManager *manager = [%c(AlarmManager) sharedManager];
+    //[manager loadAlarms];
 
     // Instead of reverting a bunch of times to use my nextAlarm algorithm, we
     // can use this to pull actually valid information (which it won't do by
@@ -70,16 +70,22 @@
     // finding the valid prefs, and using YES for activeOnly:, or just by
     // checking isActive status somewhere, and cycling by adding a millisecond
     // to the ForDate: argument.
-    _nextAlarm = [manager nextAlarmForDate:[NSDate date] activeOnly:NO allowRepeating:YES];
+//    _nextAlarm = [manager nextAlarmForDate:[NSDate date] activeOnly:NO allowRepeating:YES];
+    UILocalNotification *nextAlarmNotification = MSHookIvar<UILocalNotification *>([%c(SBClockDataProvider) sharedInstance], "_nextAlarmForToday");
+    if (!nextAlarmNotification) {
+        return;
+    }
 
-    NSLog(@"[Tranquil / DEBUG] Out of all read alarms:%@, it was decided %@ was most valid...", manager.alarms, _nextAlarm);
+    _nextAlarm = [[Alarm alloc] initWithNotification:nextAlarmNotification];
+    NSLog(@"[Tranquil] Pulled next alarm from provider: %@", _nextAlarm);
+    //NSLog(@"[Tranquil / DEBUG] Out of all read alarms:%@, it was decided %@ was most valid...", manager.alarms, _nextAlarm);
 
     // Now that we presumably have a valid Alarm instance, it's time to create
     // a standard view for it, and load it in with essential elements.
     _nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:self.bounds];
 
-    // TODO: Find an actually valid way of detecting enabled status...
     [_nextAlarmView.enabledSwitch setOn:_nextAlarm.isActive];
+    [_nextAlarmView.enabledSwitch addTarget:self action:@selector(switchStateChanged:) forControlEvents:UIControlEventValueChanged];
 
     // Time Label (10:30 AM)
     DigitalClockLabel *nextAlarmDigitalLabel = _nextAlarmView.timeLabel;
@@ -159,7 +165,9 @@
 
     // Detail Label (Alarm, xxx xxx xxx)
     UIColor *appleGrayAlarmColor = [UIColor colorWithRed:0.556863 green:0.556863 blue:0.576471 alpha:1];
-    [_nextAlarmView setName:_nextAlarm.uiTitle andRepeatText:dayText textColor:appleGrayAlarmColor];
+    NSString *name = [[NSBundle bundleWithPath:@"/Applications/MobileTimer.app"] localizedStringForKey:_nextAlarm.uiTitle value:_nextAlarm.uiTitle table:@"Localizable"];
+
+    [_nextAlarmView setName:name andRepeatText:dayText textColor:appleGrayAlarmColor];
     [_nextAlarmView detailLabel].textColor = appleGrayAlarmColor;
 
     // Add view to main widget view holder
@@ -216,11 +224,24 @@
     return dayDays;
 }
 
+- (void)switchStateChanged:(UISwitch *)sender {
+    if (!sender.isOn) {
+        // TODO: make this actually take effect in the MT app and all that
+        SBClockDataProvider *provider = [%c(SBClockDataProvider) sharedInstance];
+        Alarm *next = [[Alarm alloc] initWithNotification:MSHookIvar<UILocalNotification *>(provider, "_nextAlarmForToday")];
+        [[AlarmManager sharedManager] updateAlarm:next active:NO];
+        [provider _calculateNextTodayAlarmAndBulletinWithScheduledNotifications:nil];
+        [provider _publishAlarmsWithScheduledNotifications:MSHookIvar<UILocalNotification *>(provider, "_nextAlarmForToday")];
+
+        [self loadFullView];
+    }
+}
+
 // Layout views added in -loadFullView to fit the view properly
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    _nextAlarmView.frame = /*_nextAlarm ?*/ self.bounds /*: CGRectZero*/;
+    _nextAlarmView.frame = _nextAlarm ? self.bounds : CGRectMake(0.0, 0.0, _nextAlarmView.frame.size.width, 1.0);
 
     if (_backgroundImageView) {
         _backgroundImageView.frame = CGRectInset(self.bounds, 2.0f, 0.0f);

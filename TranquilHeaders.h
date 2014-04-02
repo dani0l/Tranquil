@@ -2,6 +2,8 @@
 // Let's define what an "Alarm is..."
 @interface Alarm : NSObject
 
+@property BOOL active;
+
 - (NSString *)alarmId;
 - (NSURL *)alarmIdUrl;
 - (BOOL)allowsSnooze;
@@ -34,6 +36,18 @@
 @end
 
 // Now, let's pull the next possible Alarm from the persistant Manager...
+@interface SBClockDataProvider {
+	UILocalNotification *_nextAlarmForToday;
+	UILocalNotification *_firstAlarmForTomorrow;
+	NSDate *_nextTomorrowFireDate;
+}
+
++ (id)sharedInstance;
+- (void)_calculateNextTodayAlarmAndBulletinWithScheduledNotifications:(id)scheduledNotifications;
+- (void)_publishAlarmsWithScheduledNotifications:(id)scheduledNotifications;
+
+@end
+
 @interface AlarmManager : NSObject
 
 + (id)copyReadAlarmsFromPreferences;
