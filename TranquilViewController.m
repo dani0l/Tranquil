@@ -63,11 +63,11 @@
 - (void)unloadView {
     [self.view removeFromSuperview];
 	self.view = nil;
-	//Destroy any additional subviews you added here!
+	// Destroy any additional subviews you added here!
 }
 
 - (float)viewHeight {
-	return 70.0f;
+	return 90.5; // Default for AlarmViews
 }
 
 - (void)viewWillAppear {
@@ -88,6 +88,7 @@
 
 #pragma mark - TouchFix
 
+// Not sure how to use this, returning a valid URL doesn't do much...
 - (NSURL *)launchURLForTapLocation:(CGPoint)point {
     UITouch *touch = [[UITouch alloc] initWithPoint:[self.view convertPoint:point toView:self.view.window] andView:self.view];
 

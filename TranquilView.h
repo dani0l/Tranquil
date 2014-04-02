@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "TranquilMobileTimer.h"
+#import "TranquilHeaders.h"
 
 @interface TranquilView : UIView
 

@@ -34,7 +34,7 @@
 }
 
 - (CGSize)preferredViewSize {
-	return CGSizeMake(320.0f, 70.0f);
+	return CGSizeMake(320.0f, 90.5f); // Default AlarmView height
 }
 
 - (void)viewDidLoad {
