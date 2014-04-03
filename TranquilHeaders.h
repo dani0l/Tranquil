@@ -223,3 +223,8 @@
 -(void)applicationOpenURL:(id)url publicURLsOnly:(BOOL)only;
 -(void)_applicationOpenURL:(id)url withApplication:(id)application sender:(id)sender publicURLsOnly:(BOOL)only animating:(BOOL)animating additionalActivationFlags:(id)flags activationHandler:(id)handler;
 @end
+
+// For the tap-down color
+@interface SBNotificationCenterViewController
++ (id)grayControlInteractionTintColor;
+@end

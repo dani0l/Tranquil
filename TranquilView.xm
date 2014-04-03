@@ -92,74 +92,48 @@
     nextAlarmDigitalLabel.textColor = [UIColor whiteColor];
     [nextAlarmDigitalLabel setDate:_nextAlarm.nextFireDate];
 
-    // The Alarm class doesn't give us any handy way to convert weekdays to the
-    // casual text used in each AlarmView. This is pretty simple to reverse, however
-    // using the daySetting property of every Alarm. Using some simple cycript
-    // inspections, I was able to discover that EVERY day is represented by
-    // it's corresponding power of two. So:
-    //    Monday = (technical) 1st day of week = 2 ^ 0
-    // Which also corresponds to its repeatingDays, which is just a list of
-    // NSNumbers that are the day's day-of-week, as well as power of two:
-    //    Tuesday = @[2] = 2 ^ 1 = 2
-    // This pattern continues clearly for every day of the week:
-    // daySetting = 0 = None
-    //            = 1 = Every Monday = @[1]
-    //            = 2 = Every Tuesday = @[2]
-    //            = 4 = Every Wednesday = @[3]
-    //            = 8 = Every Thursday = @[4]
-    //            = 16 = Every Friday = @[5]
-    //            = 32 = Every Saturday = @[6]
-    //            = 64 = Every Sunday = @[0]
-    // And translates directly into the sets of repeating days. So, for weekdays,
-    // the daySetting value is (for repeatingDays @[1,2,3,4,5]):
-    //    Monday + Tuesday + Wednesday + Thursday + Friday
-    //    2 ^ 0  + 2 ^ 1   + 2 ^ 2     + 2 ^ 3    + 2 ^ 4   = 31
-    // And so forth...
-    //            = 31 = Weekdays = @[1,2,3,4,5]
-    //            = 96 = Weekends = @[0, 6]
-    //            = 127 = Every day = @[0,1,2,3,4,5,6]
-    // In order to separate every day, it's simply a process of reducing this
-    // great big number into its smaller, fitting parts:
-    //    123 = 2^0+2^1+2^3+2^4+2^5+2^6 = Mon Tue Thu Fri Sat Sun
-    // It's just binary conversion from there on!
-    NSString *dayText;
-    NSUInteger decimalDays = [_nextAlarm daySetting];
-    switch (decimalDays) {
+    // Some simple logic checks for the repeating text. Used to use some complex
+    // binary conversion (see commit f447e92ebbdc046e61b00c49c51937d3f827309b
+    // /TranquilView.xm#L89).
+    NSString *repeatDaysText;
+    NSUInteger repeatDaysBinary = _nextAlarm.daySetting;
+
+    switch (repeatDaysBinary) {
         case 0:
-            dayText = @"";
+            repeatDaysText = @"";
             break;
         case 1:
-            dayText = @"Monday";
+            repeatDaysText = @"Monday";
             break;
         case 2:
-            dayText = @"Tuesday";
+            repeatDaysText = @"Tuesday";
             break;
         case 4:
-            dayText = @"Wednesday";
+            repeatDaysText = @"Wednesday";
             break;
         case 8:
-            dayText = @"Thursday";
+            repeatDaysText = @"Thursday";
             break;
         case 16:
-            dayText = @"Friday";
+            repeatDaysText = @"Friday";
             break;
         case 31:
-            dayText = @"Weekdays";
+            repeatDaysText = @"Weekdays";
             break;
         case 32:
-            dayText = @"Saturday";
+            repeatDaysText = @"Saturday";
             break;
         case 64:
-            dayText = @"Sunday";
+            repeatDaysText = @"Sunday";
             break;
         case 96:
-            dayText = @"Weekends";
+            repeatDaysText = @"Weekends";
             break;
         case 127:
-            dayText = @"Every day";
+            repeatDaysText = @"Every day";
             break;
         default:
-            dayText = [self dayTextFromDecimalDays:decimalDays];
+            repeatDaysText = [self repeatDaysForArray:_nextAlarm.repeatDays];
             break;
     }
 
@@ -167,7 +141,7 @@
     UIColor *appleGrayAlarmColor = [UIColor colorWithRed:0.556863 green:0.556863 blue:0.576471 alpha:1];
     NSString *name = [[NSBundle bundleWithPath:@"/Applications/MobileTimer.app"] localizedStringForKey:_nextAlarm.uiTitle value:_nextAlarm.uiTitle table:@"Localizable"];
 
-    [_nextAlarmView setName:name andRepeatText:dayText textColor:appleGrayAlarmColor];
+    [_nextAlarmView setName:name andRepeatText:repeatDaysText textColor:appleGrayAlarmColor];
     [_nextAlarmView detailLabel].textColor = appleGrayAlarmColor;
 
     // Add view to main widget view holder
@@ -175,6 +149,37 @@
     [self addSubview:_nextAlarmView];
 
     NSLog(@"[Tranquil] Created an AlarmView (%@) using the properties set in the next Alarm (%@). Our recursive view hierachy is currently: %@", _nextAlarmView, _nextAlarm, [_nextAlarmView recursiveDescription]);
+}
+
+- (NSString *)repeatDaysForArray:(NSArray *)repeatDays {
+    NSString *runningRepeatDays = @"";
+    for (int i = 0; i < repeatDays.count; i++) {
+        switch ([repeatDays[i] intValue]) {
+            case 0:
+                runningRepeatDays = @"Sun";
+                break;
+            case 1:
+                runningRepeatDays = [runningRepeatDays stringByAppendingString:@"Mon"];
+                break;
+            case 2:
+                runningRepeatDays = [runningRepeatDays stringByAppendingString:@"Tue"];
+                break;
+            case 3:
+                runningRepeatDays = [runningRepeatDays stringByAppendingString:@"Wed"];
+                break;
+            case 4:
+                runningRepeatDays = [runningRepeatDays stringByAppendingString:@"Thu"];
+                break;
+            case 5:
+                runningRepeatDays = [runningRepeatDays stringByAppendingString:@"Fri"];
+                break;
+            case 6:
+                runningRepeatDays = [runningRepeatDays stringByAppendingString:@"Sat"];
+                break;
+        }
+    }
+
+    return runningRepeatDays;
 }
 
 - (NSString *)dayTextFromDecimalDays:(NSUInteger)decimal {
@@ -248,29 +253,31 @@
     }
 }
 
+// User pressed down with finger on widget...
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     _touchDown = YES;
-    self.backgroundColor = [UIColor darkGrayColor];
+    self.backgroundColor = [%c(SBNotificationCenterViewController) grayControlInteractionTintColor];
+    // ^ SpringBoard's reference to the low-opacity touch-down color ("UIDeviceWhiteColorSpace 1 0.15")
 }
 
+// User lifted up with finger on widget...
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    // Should launch Clock app to alarm presented in NC using the private
-    // alarmIDUrl set in the Alarm class.
     if (_touchDown) {
-        self.backgroundColor = [UIColor clearColor];
-        NSURL *launchURL = _nextAlarm ? _nextAlarm.alarmIdUrl : [NSURL URLWithString:@"x-apple-clock:"];
-        NSLog(@"[Tranquil] Detected tap on widget, url to launch is: %@", launchURL);
-        [(SpringBoard *)[UIApplication sharedApplication] applicationOpenURL:[%c(ClockManager) urlForClockAppSection:1] publicURLsOnly:NO];
-        // [(SpringBoard *)[UIApplication sharedApplication] applicationOpenURL:[%c(ClockManager) urlForClockAppSection:[%c(ClockManager) sectionFromClockAppURL:launchURL]] publicURLsOnly:NO];
         _touchDown = NO;
+        self.backgroundColor = [UIColor clearColor];
+
+        // Private URL (maybe used for inter-app business):
+        // NSURL *launchURL = _nextAlarm ? _nextAlarm.alarmIdUrl : [NSURL URLWithString:@"x-apple-clock:"];
+        NSLog(@"[Tranquil] Detected tap on widget, launching MobileTimer to second tab...");
+        [(SpringBoard *)[UIApplication sharedApplication] applicationOpenURL:[%c(ClockManager) urlForClockAppSection:1] publicURLsOnly:NO];
     }
 }
 
+// User slid away from widget (or some other manner of preventing tap up)...
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     if (_touchDown) {
-        self.backgroundColor = [UIColor clearColor];
         _touchDown = NO;
+        self.backgroundColor = [UIColor clearColor];
     }
 }
 
