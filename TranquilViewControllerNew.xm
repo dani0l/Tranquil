@@ -34,7 +34,7 @@
 }
 
 - (CGSize)preferredViewSize {
-	return CGSizeMake(320.0f, 90.5f); // Default AlarmView height
+	return [%c(TranquilView) nextAlarmNotification] ? CGSizeMake(320.0f, 90.5f) : CGSizeZero; 
 }
 
 - (void)viewDidLoad {
@@ -48,6 +48,7 @@
 
 // Notification Center was opened
 - (void)hostDidPresent {
+    self.view.frame = (CGRect){CGPointZero, self.preferredViewSize};
     [selfView loadFullView];
 	[super hostDidPresent];
 }

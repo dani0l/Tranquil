@@ -67,7 +67,7 @@
 }
 
 - (float)viewHeight {
-	return 90.5; // Default for AlarmViews
+	return 90.5; // Default AlarmView height
 }
 
 - (void)viewWillAppear {

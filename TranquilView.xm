@@ -26,6 +26,10 @@
 
 #define iOS7 (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_7_0)
 
++ (UILocalNotification *)nextAlarmNotification {
+    return MSHookIvar<UILocalNotification *>([%c(SBClockDataProvider) sharedInstance], "_nextAlarmForToday");
+}
+
 - (void)setBackgroundImage:(UIImage *)backgroundImage {
     if (backgroundImage) {
         if (!_backgroundImageView) {
@@ -71,7 +75,8 @@
     // checking isActive status somewhere, and cycling by adding a millisecond
     // to the ForDate: argument.
 //    _nextAlarm = [manager nextAlarmForDate:[NSDate date] activeOnly:NO allowRepeating:YES];
-    UILocalNotification *nextAlarmNotification = MSHookIvar<UILocalNotification *>([%c(SBClockDataProvider) sharedInstance], "_nextAlarmForToday");
+
+    UILocalNotification *nextAlarmNotification = [self.class nextAlarmNotification];
     if (!nextAlarmNotification) {
         return;
     }

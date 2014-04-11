@@ -12,6 +12,8 @@
 
 @interface TranquilView : UIView
 
++ (UILocalNotification *)nextAlarmNotification;
+
 - (void)setBackgroundImage:(UIImage *)backgroundImage;
 - (void)loadFullView;
 
