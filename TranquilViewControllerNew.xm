@@ -30,11 +30,11 @@
 }
 
 - (void)loadView {
-    self.view = [[TranquilView alloc] initWithFrame:(CGRect){CGPointZero, self.preferredViewSize}];
+    self.view = [[TranquilView alloc] initWithFrame:(CGRect){CGPointZero, [self preferredViewSize]}];
 }
 
 - (CGSize)preferredViewSize {
-	return [%c(TranquilView) nextAlarmNotification] ? CGSizeMake(320.0f, 90.5f) : CGSizeZero; 
+	return CGSizeMake(320.0, 90.5);
 }
 
 - (void)viewDidLoad {
@@ -48,9 +48,15 @@
 
 // Notification Center was opened
 - (void)hostDidPresent {
-    self.view.frame = (CGRect){CGPointZero, self.preferredViewSize};
     [selfView loadFullView];
 	[super hostDidPresent];
+
+/*    if (![%c(TranquilView) nextAlarmNotification]) {
+        NSLog(@"[Tranquil] Detected no impending alarm, shrinking TranquilView...");
+        [UIView animateWithDuration:0.5 animations:^(void) {
+            self.view.superview.superview.frame = CGRectZero;
+        }];
+    }*/
 }
 
 @end

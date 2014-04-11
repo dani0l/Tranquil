@@ -78,6 +78,7 @@
 
     UILocalNotification *nextAlarmNotification = [self.class nextAlarmNotification];
     if (!nextAlarmNotification) {
+        // TODO add some placeholder view here or something
         return;
     }
 
@@ -89,7 +90,7 @@
     // a standard view for it, and load it in with essential elements.
     _nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:self.bounds];
 
-    [_nextAlarmView.enabledSwitch setOn:_nextAlarm.isActive];
+    [_nextAlarmView.enabledSwitch setOn:YES];
     [_nextAlarmView.enabledSwitch addTarget:self action:@selector(switchStateChanged:) forControlEvents:UIControlEventValueChanged];
 
     // Time Label (10:30 AM)
@@ -105,6 +106,7 @@
 
     switch (repeatDaysBinary) {
         case 0:
+        case 127:
             repeatDaysText = @"";
             break;
         case 1:
@@ -134,9 +136,9 @@
         case 96:
             repeatDaysText = @"Weekends";
             break;
-        case 127:
-            repeatDaysText = @"Every day";
-            break;
+    //    case 127:                            // Strangely enough, this is the
+    //        repeatDaysText = @"Every day";   // case for non-repeating as well...
+    //        break;
         default:
             repeatDaysText = [self repeatDaysForArray:_nextAlarm.repeatDays];
             break;
@@ -159,6 +161,7 @@
 - (NSString *)repeatDaysForArray:(NSArray *)repeatDays {
     NSString *runningRepeatDays = @"";
     for (int i = 0; i < repeatDays.count; i++) {
+        runningRepeatDays = [runningRepeatDays stringByAppendingString:@" "];
         switch ([repeatDays[i] intValue]) {
             case 0:
                 runningRepeatDays = @"Sun";
