@@ -14,5 +14,7 @@ Tranquil_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 
+before-stage::
+	find . -name ".DS_Store" -delete
 after-install::
 	install.exec "killall -9 backboardd"

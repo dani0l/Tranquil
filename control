@@ -4,7 +4,7 @@ Pre-Depends: firmware (>= 7.0)
 Depends: mobilesubstrate
 Version: 0.1
 Architecture: iphoneos-arm
-Description: A more helpful Alarm reminder.
+Description: Serenity in alarms.
 Maintainer: Julian Weiss <insanjmail@gmail.com>
 Author: Julian (insanj) Weiss
 Section: Tweaks

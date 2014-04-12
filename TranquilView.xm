@@ -51,7 +51,6 @@
 // Load views to display in parent view (which is a child to ViewController),
 // called manually from TranquilViewControllerNew.
 - (void)loadFullView {
-
     // Since this method is called every time the NC is revealed, we should clean
     // up after ourselves (ARC prevents a lot of garbage).
     if (_nextAlarmView) {
@@ -59,37 +58,24 @@
         [_nextAlarmView removeFromSuperview];
     }
 
-    /*UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [spinner startAnimating];
-    spinner.center = self.center;
-    [self addSubview:spinner];*/
-
-    //CFPreferencesAppSynchronize(CFSTR("com.apple.mobiletimer"));
-    //AlarmManager *manager = [%c(AlarmManager) sharedManager];
-    //[manager loadAlarms];
-
-    // Instead of reverting a bunch of times to use my nextAlarm algorithm, we
-    // can use this to pull actually valid information (which it won't do by
-    // default, since all alarms are marked inactive in preferences) by either
-    // finding the valid prefs, and using YES for activeOnly:, or just by
-    // checking isActive status somewhere, and cycling by adding a millisecond
-    // to the ForDate: argument.
-//    _nextAlarm = [manager nextAlarmForDate:[NSDate date] activeOnly:NO allowRepeating:YES];
-
+    // We can pull the "next alarm" shown in the Notification Center by retrieving
+    // the _nextAlarmForToday from SBClockDataProvider. I've put this into a nice
+    // little method for external checking (which will allow for smart hiding).
     UILocalNotification *nextAlarmNotification = [self.class nextAlarmNotification];
     if (!nextAlarmNotification) {
-        // TODO add some placeholder view here or something
+        // TODO: add some placeholder view here or something, if we can't figure
+        // out how to hide things.
         return;
     }
 
     _nextAlarm = [[Alarm alloc] initWithNotification:nextAlarmNotification];
     NSLog(@"[Tranquil] Pulled next alarm from provider: %@", _nextAlarm);
-    //NSLog(@"[Tranquil / DEBUG] Out of all read alarms:%@, it was decided %@ was most valid...", manager.alarms, _nextAlarm);
 
     // Now that we presumably have a valid Alarm instance, it's time to create
     // a standard view for it, and load it in with essential elements.
     _nextAlarmView = [[%c(AlarmView) alloc] initWithFrame:self.bounds];
 
+    // Enabled Switch (always on by default)
     [_nextAlarmView.enabledSwitch setOn:YES];
     [_nextAlarmView.enabledSwitch addTarget:self action:@selector(switchStateChanged:) forControlEvents:UIControlEventValueChanged];
 
@@ -103,7 +89,6 @@
     // /TranquilView.xm#L89).
     NSString *repeatDaysText;
     NSUInteger repeatDaysBinary = _nextAlarm.daySetting;
-
     switch (repeatDaysBinary) {
         case 0:
         case 127:
@@ -151,10 +136,7 @@
     [_nextAlarmView setName:name andRepeatText:repeatDaysText textColor:appleGrayAlarmColor];
     [_nextAlarmView detailLabel].textColor = appleGrayAlarmColor;
 
-    // Add view to main widget view holder
-    // [spinner removeFromSuperview];
     [self addSubview:_nextAlarmView];
-
     NSLog(@"[Tranquil] Created an AlarmView (%@) using the properties set in the next Alarm (%@). Our recursive view hierachy is currently: %@", _nextAlarmView, _nextAlarm, [_nextAlarmView recursiveDescription]);
 }
 
