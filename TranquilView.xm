@@ -172,71 +172,46 @@
     return runningRepeatDays;
 }
 
-- (NSString *)dayTextFromDecimalDays:(NSUInteger)decimal {
-    NSUInteger binaryDays = decimal;
-    NSString *binaryString = @"";
-    for (int i = 0; binaryDays > 0; i++) {
-        binaryString = [NSString stringWithFormat:@"%u%@", (unsigned int) binaryDays&1, binaryString];
-        binaryDays = binaryDays >> 1;
-    }
-
-    NSMutableArray *repeatDays = [[NSMutableArray alloc] init];
-    [binaryString enumerateSubstringsInRange:NSMakeRange(0, [binaryString length]) options:(NSStringEnumerationByComposedCharacterSequences) usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-        if ([substring boolValue]) {
-            [repeatDays addObject:@(pow(2, [binaryString length] - (substringRange.location + 1)))];
-        }
-    }];
-
-    NSString *dayDays = @"";
-    for (int i = 0; i < repeatDays.count; i++) {
-        dayDays = [dayDays stringByAppendingString:@" "];
-        int day = [repeatDays[i] intValue];
-        switch (day) {
-            case 1:
-                dayDays = @"Mon";
-                break;
-            case 2:
-                dayDays = [dayDays stringByAppendingString:@"Tue"];
-                break;
-            case 4:
-                dayDays = [dayDays stringByAppendingString:@"Wed"];
-                break;
-            case 8:
-                dayDays = [dayDays stringByAppendingString:@"Thu"];
-                break;
-            case 16:
-                dayDays = [dayDays stringByAppendingString:@"Fri"];
-                break;
-            case 32:
-                dayDays = [dayDays stringByAppendingString:@"Sat"];
-                break;
-            case 64:
-                dayDays = [dayDays stringByAppendingString:@"Sun"];
-                break;
-        }
-    }
-
-    return dayDays;
-}
-
 - (void)switchStateChanged:(UISwitch *)sender {
     if (!sender.isOn) {
-        // TODO: make this actually take effect in the MT app and all that
         SBClockDataProvider *provider = [%c(SBClockDataProvider) sharedInstance];
-        Alarm *next = [[Alarm alloc] initWithNotification:MSHookIvar<UILocalNotification *>(provider, "_nextAlarmForToday")];
-        [[AlarmManager sharedManager] updateAlarm:next active:NO];
-        [provider _calculateNextTodayAlarmAndBulletinWithScheduledNotifications:nil];
-        [provider _publishAlarmsWithScheduledNotifications:MSHookIvar<UILocalNotification *>(provider, "_nextAlarmForToday")];
+        BBDataProviderProxy *proxy = MSHookIvar<BBDataProviderProxy *>(provider, "_dataProviderProxy");
+        [proxy withdrawBulletinsWithRecordID:@"NextTodayAlarm"];
 
-        [self loadFullView];
+        [_nextAlarm dropNotifications];
+        [_nextAlarm refreshActiveState];
+        [[%c(AlarmManager) sharedManager] handleAnyNotificationChanges];
+
+// - (void)reloadScheduledNotificationsWithRefreshActive:(BOOL)arg1 cancelUnused:(BOOL)arg2;
+//- (void)loadScheduledNotificationsWithCancelUnused:(BOOL)arg1;
+//- (void)loadScheduledNotifications;
+//- (void)handleAnyNotificationChanges;
+
+    //  [provider _calculateNextTodayAlarmAndBulletinWithScheduledNotifications:nil];
+
+
+        // id <AlarmDelegate> delegate = _nextAlarm.delegate;
+        // [delegate alarmDidUpdate:_nextAlarm];
+    /*
+        SBApplicationClockLocalNotificationsUpdated
+        scheduledLocalNotifications
+        BBBulletinRequest *reschedule = [BBBulletinRequest alloc] init];
+        [reschedule setSectionID:@"com.apple.mobiletimer"];
+        [reschedule setRecordID:@"Alarm"];
+        [reschedule setEndDate:[NSDate distantFuture]];
+        [reschedule setPublisherBulletinID:[[%c(NSUUID) UUID] UUIDString]]; */
+
+    // Alarm *next = [[Alarm alloc] initWithNotification:MSHookIvar<UILocalNotification *>(provider, "_nextAlarmForToday")];
+    // [[AlarmManager sharedManager] updateAlarm:next active:NO];
+    // [provider _publishAlarmsWithScheduledNotifications:MSHookIvar<UILocalNotification *>(provider, "_nextAlarmForToday")];
+
+    //    [self loadFullView];
     }
 }
 
 // Layout views added in -loadFullView to fit the view properly
 - (void)layoutSubviews {
     [super layoutSubviews];
-
-    _nextAlarmView.frame = _nextAlarm ? self.bounds : CGRectMake(0.0, 0.0, _nextAlarmView.frame.size.width, 1.0);
 
     if (_backgroundImageView) {
         _backgroundImageView.frame = CGRectInset(self.bounds, 2.0f, 0.0f);

@@ -1,14 +1,56 @@
 
 // Let's define what an "Alarm is..."
 @interface Alarm : NSObject
+@property(getter=isActive,readonly) BOOL active;
+@property(readonly) NSString * alarmId;
+@property(readonly) NSURL * alarmIdUrl;
+@property BOOL allowsSnooze;
+@property unsigned int daySetting;
+@property id delegate;
+@property(readonly) Alarm * editingProxy;
+@property unsigned int hour;
+@property(readonly) NSDate * lastModified;
+@property unsigned int minute;
+@property(readonly) NSString * rawTitle;
+@property(readonly) NSArray * repeatDays;
+@property(readonly) BOOL repeats;
+@property(readonly) unsigned int revision;
+@property(readonly) NSDictionary * settings;
+@property(readonly) NSString * snapshotSound;
+@property(readonly) int snapshotSoundType;
+@property(getter=isSnoozed,readonly) BOOL snoozed;
+@property(readonly) NSString * sound;
+@property(readonly) int soundType;
+@property(readonly) NSString * uiTitle;
 
-@property BOOL active;
++ (id)_newSettingsFromNotification:(id)arg1;
++ (BOOL)_verifyNotificationSettings:(id)arg1 againstAlarmSettings:(id)arg2;
++ (BOOL)_verifyNotificationSettings:(id)arg1 againstUserInfo:(id)arg2;
++ (BOOL)isSnoozeNotification:(id)arg1;
++ (BOOL)verifyDaySetting:(id)arg1 withMessageList:(id)arg2;
++ (BOOL)verifyHourSetting:(id)arg1 withMessageList:(id)arg2;
++ (BOOL)verifyIdSetting:(id)arg1 withMessageList:(id)arg2;
++ (BOOL)verifyMinuteSetting:(id)arg1 withMessageList:(id)arg2;
++ (BOOL)verifySettings:(id)arg1;
 
-- (NSString *)alarmId;
-- (NSURL *)alarmIdUrl;
+- (id)_newBaseDateComponentsForDay:(int)arg1;
+- (id)_newNotification:(int)arg1;
+- (unsigned int)_notificationsCount;
+- (id)alarmId;
+- (id)alarmIdUrl;
 - (BOOL)allowsSnooze;
+- (void)applyChangesFromEditingProxy;
+- (void)applySettings:(id)arg1;
+- (void)cancelNotifications;
 - (int)compareTime:(id)arg1;
 - (unsigned int)daySetting;
+- (void)dealloc;
+- (id)debugDescription;
+- (id)delegate;
+- (id)description;
+- (void)dropEditingProxy;
+- (void)dropNotifications;
+- (id)editingProxy;
 - (void)handleAlarmFired:(id)arg1;
 - (void)handleNotificationSnoozed:(id)arg1 notifyDelegate:(BOOL)arg2;
 - (unsigned int)hash;
@@ -25,18 +67,88 @@
 - (unsigned int)minute;
 - (id)nextFireDate;
 - (id)nextFireDateAfterDate:(id)arg1 notification:(id)arg2 day:(int)arg3;
+- (id)nowDateForOffsetCalculation;
+- (void)prepareEditingProxy;
+- (void)prepareNotifications;
 - (id)rawTitle;
 - (void)refreshActiveState;
 - (id)repeatDays;
 - (BOOL)repeats;
-- (NSDictionary *)settings;
-- (NSString *)sound;
-- (NSString *)uiTitle;
-
+- (unsigned int)revision;
+- (void)scheduleNotifications;
+- (void)setAllowsSnooze:(BOOL)arg1;
+- (void)setDaySetting:(unsigned int)arg1;
+- (void)setDelegate:(id)arg1;
+- (void)setHour:(unsigned int)arg1;
+- (void)setMinute:(unsigned int)arg1;
+- (void)setSound:(id)arg1 ofType:(int)arg2;
+- (void)setTitle:(id)arg1;
+- (id)settings;
+- (id)snapshotSound;
+- (int)snapshotSoundType;
+- (id)sound;
+- (int)soundType;
+- (id)timeZoneForOffsetCalculation;
+- (BOOL)tryAddNotification:(id)arg1;
+- (id)uiTitle;
 @end
+
+@protocol AlarmDelegate
+- (void)alarmDidUpdate:(Alarm *)arg1;
+@end
+
+
+
+@interface BBDataProviderProxy : NSObject
+@property(copy) NSString *sectionID;
+
+- (void)_makeClientRequest:(id)arg1;
+- (void)_makeServerRequest:(id)arg1;
+- (void)_processPendingRequests;
+- (void)_queue_makeServerRequest:(id)arg1;
+- (id)_serverProxy;
+- (void)_updateIdentity:(id)arg1;
+- (void)addBulletin:(id)arg1 forDestinations:(unsigned int)arg2;
+- (void)addBulletin:(id)arg1 interrupt:(BOOL)arg2;
+- (void)attachmentAspectRatioForRecordID:(id)arg1 completion:(id)arg2;
+- (void)attachmentPNGDataForRecordID:(id)arg1 sizeConstraints:(id)arg2 completion:(id)arg3;
+- (void)bulletinsWithRequestParameters:(id)arg1 lastCleared:(id)arg2 completion:(id)arg3;
+- (void)clearedInfoAndBulletinsForClearingAllBulletinsWithLimit:(id)arg1 lastClearedInfo:(id)arg2 completion:(id)arg3;
+- (void)clearedInfoForBulletins:(id)arg1 lastClearedInfo:(id)arg2 completion:(id)arg3;
+- (void)connection:(id)arg1 connectionStateDidChange:(BOOL)arg2;
+- (id)dataProvider;
+- (void)dataProviderDidLoad;
+- (void)dealloc;
+- (void)deliverBulletinActionResponse:(id)arg1;
+- (void)deliverMessageWithName:(id)arg1 userInfo:(id)arg2;
+- (id)description;
+- (id)identity;
+- (id)initWithDataProvider:(id)arg1 identity:(id)arg2 queue:(id)arg3 dataProviderQueue:(id)arg4;
+- (void)invalidate;
+- (void)invalidateBulletins;
+- (void)modifyBulletin:(id)arg1;
+- (void)noteSectionInfoDidChange:(id)arg1;
+- (void)ping:(id)arg1;
+- (id)proxy:(id)arg1 detailedSignatureForSelector:(SEL)arg2;
+- (void)reloadDefaultSectionInfo;
+- (void)reloadSectionParameters;
+- (void)resume;
+- (NSString *)sectionID;
+- (void)sectionIdentityWithCompletion:(id)arg1;
+- (void)setConnection:(id)arg1;
+- (void)setDataProvider:(id)arg1;
+- (void)setIdentity:(id)arg1;
+- (void)setSectionID:(NSString *)arg1;
+- (void)updateClearedInfoWithHandler:(id)arg1;
+- (void)updateSectionInfoWithHandler:(id)arg1;
+- (void)withdrawBulletinWithPublisherBulletinID:(id)arg1;
+- (void)withdrawBulletinsWithRecordID:(id)arg1;
+@end
+
 
 // Now, let's pull the next possible Alarm from the persistant Manager...
 @interface SBClockDataProvider {
+	BBDataProviderProxy *_dataProviderProxy; //asdfjaslkdfj
 	UILocalNotification *_nextAlarmForToday;
 	UILocalNotification *_firstAlarmForTomorrow;
 	NSDate *_nextTomorrowFireDate;
