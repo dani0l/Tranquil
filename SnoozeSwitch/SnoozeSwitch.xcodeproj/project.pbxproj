@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4F97E096B7DD4FEE917F997D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F97EEE8886D4FF0165AF17D /* Foundation.framework */; };
+		4F97E235030EAF6DBE3D95E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F97EE2C1022FEFE99AE453B /* InfoPlist.strings */; };
+		4F97E3D61B6D9C321C775A99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F97EB562321E21420E6001D /* InfoPlist.strings */; };
+		4F97E3E0856EF2A9F63CB67C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F97E9BA757364BB3B2EFBA3 /* CoreGraphics.framework */; };
+		4F97E5D9E3BA49FD63BCF16D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97E4CD0CF6E5A6AAC47752 /* main.m */; };
+		4F97E819EF9B5F21960A2A2A /* SSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97E44B37390E98B9BA067A /* SSViewController.m */; };
+		4F97E8607B81275A673BA56A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F97E4B4FD4570F4DB080FB8 /* XCTest.framework */; };
+		4F97E88D9CD27D2548A28FF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F97EEE8886D4FF0165AF17D /* Foundation.framework */; };
+		4F97E8C926CD52ACC2016DC9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F97EA514704E1F4BE5E584A /* Images.xcassets */; };
+		4F97EB2C8A4224B39EDC03D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F97E5375D6E81C42B1C4366 /* UIKit.framework */; };
+		4F97EE5A0F2F79FDB6762B3F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F97E5375D6E81C42B1C4366 /* UIKit.framework */; };
+		4F97EF36642743B7C729839B /* SnoozeSwitchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97E9F8CEBBC90E65D925BE /* SnoozeSwitchTests.m */; };
+		4F97EFE0C9BB5E7C7326BDEC /* SSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97EAAA9715555E053AAC7E /* SSAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4F97E567B3C2E2BE62281B7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F97E721399D95B89E0CD27E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F97E67D1E2E804FF9285FF9;
+			remoteInfo = SnoozeSwitch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4F97E02AEA198962A46CDF07 /* SnoozeSwitchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnoozeSwitchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F97E08D5C36C0E44F022982 /* SnoozeSwitch-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SnoozeSwitch-Prefix.pch"; sourceTree = "<group>"; };
+		4F97E3194ACC939E6BD17F2A /* SnoozeSwitch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "SnoozeSwitch-Info.plist"; sourceTree = "<group>"; };
+		4F97E44B37390E98B9BA067A /* SSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSViewController.m; sourceTree = "<group>"; };
+		4F97E4B4FD4570F4DB080FB8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		4F97E4CD0CF6E5A6AAC47752 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4F97E5375D6E81C42B1C4366 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4F97E68AD90C2837CEBA7FCC /* SnoozeSwitchTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "SnoozeSwitchTests-Info.plist"; sourceTree = "<group>"; };
+		4F97E7DDB6ECB29E47EBDC03 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4F97E8F9F4C0A1AD84FB38FC /* SSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAppDelegate.h; sourceTree = "<group>"; };
+		4F97E9BA757364BB3B2EFBA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4F97E9F8CEBBC90E65D925BE /* SnoozeSwitchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnoozeSwitchTests.m; sourceTree = "<group>"; };
+		4F97EA514704E1F4BE5E584A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4F97EAAA9715555E053AAC7E /* SSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSAppDelegate.m; sourceTree = "<group>"; };
+		4F97EBEBE1C26CCB9F00B76C /* SnoozeSwitch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnoozeSwitch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F97EC029CB64BD25B293B6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4F97ED946167F725C8577708 /* SSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSViewController.h; sourceTree = "<group>"; };
+		4F97EEE8886D4FF0165AF17D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4F97EBD989E186B672B4AFA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F97E8607B81275A673BA56A /* XCTest.framework in Frameworks */,
+				4F97E096B7DD4FEE917F997D /* Foundation.framework in Frameworks */,
+				4F97EB2C8A4224B39EDC03D7 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F97EEB866BE13F02EE16406 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F97E88D9CD27D2548A28FF6 /* Foundation.framework in Frameworks */,
+				4F97E3E0856EF2A9F63CB67C /* CoreGraphics.framework in Frameworks */,
+				4F97EE5A0F2F79FDB6762B3F /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4F97E00928DBEFB3DE6A8DAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F97EEE8886D4FF0165AF17D /* Foundation.framework */,
+				4F97E9BA757364BB3B2EFBA3 /* CoreGraphics.framework */,
+				4F97E5375D6E81C42B1C4366 /* UIKit.framework */,
+				4F97E4B4FD4570F4DB080FB8 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F97E4284C1A0A30CDDBF5F0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F97E68AD90C2837CEBA7FCC /* SnoozeSwitchTests-Info.plist */,
+				4F97EE2C1022FEFE99AE453B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4F97E4F08EAC19804C0A855B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F97E3194ACC939E6BD17F2A /* SnoozeSwitch-Info.plist */,
+				4F97EB562321E21420E6001D /* InfoPlist.strings */,
+				4F97E4CD0CF6E5A6AAC47752 /* main.m */,
+				4F97E08D5C36C0E44F022982 /* SnoozeSwitch-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4F97E5DFFC004F7C1B15A081 = {
+			isa = PBXGroup;
+			children = (
+				4F97ED50704BEA5F799158C3 /* Products */,
+				4F97E00928DBEFB3DE6A8DAA /* Frameworks */,
+				4F97E8C1B9A8829A9279B60C /* SnoozeSwitch */,
+				4F97EA03D815B9887F89A1FF /* SnoozeSwitchTests */,
+			);
+			sourceTree = "<group>";
+		};
+		4F97E8C1B9A8829A9279B60C /* SnoozeSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				4F97E4F08EAC19804C0A855B /* Supporting Files */,
+				4F97E8F9F4C0A1AD84FB38FC /* SSAppDelegate.h */,
+				4F97EAAA9715555E053AAC7E /* SSAppDelegate.m */,
+				4F97ED946167F725C8577708 /* SSViewController.h */,
+				4F97E44B37390E98B9BA067A /* SSViewController.m */,
+				4F97EA514704E1F4BE5E584A /* Images.xcassets */,
+			);
+			path = SnoozeSwitch;
+			sourceTree = "<group>";
+		};
+		4F97EA03D815B9887F89A1FF /* SnoozeSwitchTests */ = {
+			isa = PBXGroup;
+			children = (
+				4F97E4284C1A0A30CDDBF5F0 /* Supporting Files */,
+				4F97E9F8CEBBC90E65D925BE /* SnoozeSwitchTests.m */,
+			);
+			path = SnoozeSwitchTests;
+			sourceTree = "<group>";
+		};
+		4F97ED50704BEA5F799158C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F97EBEBE1C26CCB9F00B76C /* SnoozeSwitch.app */,
+				4F97E02AEA198962A46CDF07 /* SnoozeSwitchTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4F97E06DB127642EB64D2275 /* SnoozeSwitchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F97E108A24B6122FA38E64A /* Build configuration list for PBXNativeTarget "SnoozeSwitchTests" */;
+			buildPhases = (
+				4F97EFD3FC1BB2E6E87C3BF3 /* Sources */,
+				4F97EBD989E186B672B4AFA2 /* Frameworks */,
+				4F97EBB46C5160D7FDC77FFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F97E3DAA80806348E31F581 /* PBXTargetDependency */,
+			);
+			name = SnoozeSwitchTests;
+			productName = SnoozeSwitchTests;
+			productReference = 4F97E02AEA198962A46CDF07 /* SnoozeSwitchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4F97E67D1E2E804FF9285FF9 /* SnoozeSwitch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F97ED1CCB0A5119B255D2C4 /* Build configuration list for PBXNativeTarget "SnoozeSwitch" */;
+			buildPhases = (
+				4F97E90B8F525ABE4B35FF62 /* Sources */,
+				4F97EEB866BE13F02EE16406 /* Frameworks */,
+				4F97E9DB41FE6A8114495360 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SnoozeSwitch;
+			productName = SnoozeSwitch;
+			productReference = 4F97EBEBE1C26CCB9F00B76C /* SnoozeSwitch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4F97E721399D95B89E0CD27E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Julian Weiss";
+			};
+			buildConfigurationList = 4F97E27ABCDA38EC4CBE625C /* Build configuration list for PBXProject "SnoozeSwitch" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4F97E5DFFC004F7C1B15A081;
+			productRefGroup = 4F97ED50704BEA5F799158C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4F97E67D1E2E804FF9285FF9 /* SnoozeSwitch */,
+				4F97E06DB127642EB64D2275 /* SnoozeSwitchTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4F97E9DB41FE6A8114495360 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F97E3D61B6D9C321C775A99 /* InfoPlist.strings in Resources */,
+				4F97E8C926CD52ACC2016DC9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F97EBB46C5160D7FDC77FFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F97E235030EAF6DBE3D95E6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4F97E90B8F525ABE4B35FF62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F97E5D9E3BA49FD63BCF16D /* main.m in Sources */,
+				4F97EFE0C9BB5E7C7326BDEC /* SSAppDelegate.m in Sources */,
+				4F97E819EF9B5F21960A2A2A /* SSViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F97EFD3FC1BB2E6E87C3BF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F97EF36642743B7C729839B /* SnoozeSwitchTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4F97E3DAA80806348E31F581 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F97E67D1E2E804FF9285FF9 /* SnoozeSwitch */;
+			targetProxy = 4F97E567B3C2E2BE62281B7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4F97EB562321E21420E6001D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F97EC029CB64BD25B293B6C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4F97EE2C1022FEFE99AE453B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F97E7DDB6ECB29E47EBDC03 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4F97E3236B5154B771F969D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SnoozeSwitch/SnoozeSwitch-Prefix.pch";
+				INFOPLIST_FILE = "SnoozeSwitchTests/SnoozeSwitchTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		4F97E62E9744AC3335E37B60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4F97E6FC867C3FD8D111F892 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SnoozeSwitch/SnoozeSwitch-Prefix.pch";
+				INFOPLIST_FILE = "SnoozeSwitchTests/SnoozeSwitchTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		4F97E8D656815FBF261CDEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SnoozeSwitch/SnoozeSwitch-Prefix.pch";
+				INFOPLIST_FILE = "SnoozeSwitch/SnoozeSwitch-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		4F97E94A547AF0E5C51DD2C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SnoozeSwitch/SnoozeSwitch-Prefix.pch";
+				INFOPLIST_FILE = "SnoozeSwitch/SnoozeSwitch-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4F97EDB2ABD105749041B725 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4F97E108A24B6122FA38E64A /* Build configuration list for PBXNativeTarget "SnoozeSwitchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F97E3236B5154B771F969D4 /* Release */,
+				4F97E6FC867C3FD8D111F892 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F97E27ABCDA38EC4CBE625C /* Build configuration list for PBXProject "SnoozeSwitch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F97EDB2ABD105749041B725 /* Release */,
+				4F97E62E9744AC3335E37B60 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F97ED1CCB0A5119B255D2C4 /* Build configuration list for PBXNativeTarget "SnoozeSwitch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F97E8D656815FBF261CDEDC /* Release */,
+				4F97E94A547AF0E5C51DD2C1 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4F97E721399D95B89E0CD27E /* Project object */;
+}
