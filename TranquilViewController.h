@@ -9,7 +9,7 @@
 #ifndef __LP64__
 
 
-#import "BBWeeAppController-Protocol.h"
+#import "headers/BBWeeAppController-Protocol.h"
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>

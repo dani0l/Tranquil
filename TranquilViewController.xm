@@ -11,7 +11,7 @@
 #import "TranquilViewController.h"
 #import "TranquilView.h"
 
-#import "TouchFix/TouchFix.h"
+#import "headers/TouchFix/TouchFix.h"
 
 @interface TranquilViewController ()
 

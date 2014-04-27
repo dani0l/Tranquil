@@ -5,7 +5,7 @@ ARCHS = armv7 armv7s arm64
 include theos/makefiles/common.mk
 
 BUNDLE_NAME = Tranquil
-Tranquil_FILES = TranquilViewController.xm TouchFix/TouchFix.m TranquilViewControllerNew.xm TranquilView.xm TranquilInjections.xm
+Tranquil_FILES = TranquilViewController.xm headers/TouchFix/TouchFix.m TranquilViewControllerNew.xm TranquilView.xm TranquilInjections.xm
 Tranquil_FRAMEWORKS = Foundation UIKit CoreGraphics
 Tranquil_PRIVATE_FRAMEWORKS = MobileTimer BulletinBoard
 Tranquil_INSTALL_PATH = /System/Library/WeeAppPlugins
