@@ -20,6 +20,9 @@
 		4F97EE5A0F2F79FDB6762B3F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F97E5375D6E81C42B1C4366 /* UIKit.framework */; };
 		4F97EF36642743B7C729839B /* SnoozeSwitchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97E9F8CEBBC90E65D925BE /* SnoozeSwitchTests.m */; };
 		4F97EFE0C9BB5E7C7326BDEC /* SSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97EAAA9715555E053AAC7E /* SSAppDelegate.m */; };
+		9E03AA48190DB19200710B1E /* SSSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E03AA47190DB19200710B1E /* SSSwitch.m */; };
+		9E03AA4B190DB2EF00710B1E /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E03AA4A190DB2EF00710B1E /* UIImage+Color.m */; };
+		9E03AA4D190DB54700710B1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E03AA4C190DB54700710B1E /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,11 @@
 		4F97EC029CB64BD25B293B6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4F97ED946167F725C8577708 /* SSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSViewController.h; sourceTree = "<group>"; };
 		4F97EEE8886D4FF0165AF17D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9E03AA46190DB19200710B1E /* SSSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSwitch.h; sourceTree = "<group>"; };
+		9E03AA47190DB19200710B1E /* SSSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSwitch.m; sourceTree = "<group>"; };
+		9E03AA49190DB2EF00710B1E /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		9E03AA4A190DB2EF00710B1E /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		9E03AA4C190DB54700710B1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E03AA4D190DB54700710B1E /* QuartzCore.framework in Frameworks */,
 				4F97E88D9CD27D2548A28FF6 /* Foundation.framework in Frameworks */,
 				4F97E3E0856EF2A9F63CB67C /* CoreGraphics.framework in Frameworks */,
 				4F97EE5A0F2F79FDB6762B3F /* UIKit.framework in Frameworks */,
@@ -80,6 +89,7 @@
 		4F97E00928DBEFB3DE6A8DAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E03AA4C190DB54700710B1E /* QuartzCore.framework */,
 				4F97EEE8886D4FF0165AF17D /* Foundation.framework */,
 				4F97E9BA757364BB3B2EFBA3 /* CoreGraphics.framework */,
 				4F97E5375D6E81C42B1C4366 /* UIKit.framework */,
@@ -126,6 +136,10 @@
 				4F97EAAA9715555E053AAC7E /* SSAppDelegate.m */,
 				4F97ED946167F725C8577708 /* SSViewController.h */,
 				4F97E44B37390E98B9BA067A /* SSViewController.m */,
+				9E03AA46190DB19200710B1E /* SSSwitch.h */,
+				9E03AA47190DB19200710B1E /* SSSwitch.m */,
+				9E03AA49190DB2EF00710B1E /* UIImage+Color.h */,
+				9E03AA4A190DB2EF00710B1E /* UIImage+Color.m */,
 				4F97EA514704E1F4BE5E584A /* Images.xcassets */,
 			);
 			path = SnoozeSwitch;
@@ -239,6 +253,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F97E5D9E3BA49FD63BCF16D /* main.m in Sources */,
+				9E03AA48190DB19200710B1E /* SSSwitch.m in Sources */,
+				9E03AA4B190DB2EF00710B1E /* UIImage+Color.m in Sources */,
 				4F97EFE0C9BB5E7C7326BDEC /* SSAppDelegate.m in Sources */,
 				4F97E819EF9B5F21960A2A2A /* SSViewController.m in Sources */,
 			);

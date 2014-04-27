@@ -1,5 +1,5 @@
 //
-//  SSViewController.h
+//  SSSwitch.h
 //  SnoozeSwitch
 //
 //  Created by Julian Weiss on 4/27/14.
@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
-#import "SSSwitch.h"
 #import "UIImage+Color.h"
 
-@interface SSViewController : UIViewController
+@interface SSSwitch : UISwitch
 
 @end
