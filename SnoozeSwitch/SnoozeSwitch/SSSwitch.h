@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIImage+Color.h"
+#import <objc/runtime.h>
 
 @interface SSSwitch : UISwitch
 

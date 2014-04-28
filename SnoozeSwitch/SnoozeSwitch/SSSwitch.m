@@ -12,7 +12,21 @@
 
 @implementation SSSwitch
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+static char * kSnoozeSwitchIgnoreKey;
+
+- (instancetype)initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	if (self) {
+		[self addTarget:self action:@selector(actionFired) forControlEvents:UIControlEventValueChanged];
+	}
+	return self;
+}
+
+- (void)actionFired {
+	NSLog(@"fired!");
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self performSelector:@selector(completeSnoozeLongPress) withObject:nil afterDelay:SNOOZE_INTERVAL];
 	[super touchesBegan:touches withEvent:event];
 }
@@ -59,9 +73,25 @@
 		} completion:^(BOOL finished) {
 			[confirmationPulse removeFromSuperview];
 		}];
+
 		
+		objc_setAssociatedObject(self, &kSnoozeSwitchIgnoreKey, @(YES), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 		// Post notification to snooze the Alarm associated with this switch.
 	}
+}
+
+-(void)sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
+	BOOL shouldIgnore = [objc_getAssociatedObject(self, &kSnoozeSwitchIgnoreKey) boolValue];
+	NSLog(@"should ignore %@", shouldIgnore ? @"YES" : @"NO");
+	
+	if (!shouldIgnore) {
+		[super sendAction:action to:target forEvent:event];
+		objc_setAssociatedObject(self, &kSnoozeSwitchIgnoreKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	}
+}
+
+- (void)sendActionsForControlEvents:(UIControlEvents)controlEvents {
+
 }
 
 @end

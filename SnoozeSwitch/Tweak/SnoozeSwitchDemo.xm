@@ -2,6 +2,8 @@
 
 %hook UISwitch
 
+static char * kSnoozeSwitchIgnoreKey;
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	NSLog(@"-touchesBegan on:%@, superview:%@", self, self.superview);
 
@@ -59,7 +61,21 @@
 			[confirmationPulse removeFromSuperview];
 		}];
 		
+		objc_setAssociatedObject(self, &kSnoozeSwitchIgnoreKey, @(YES), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 		// Post notification to snooze the Alarm associated with this switch.
+	}
+}
+
+-(void)sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
+	BOOL shouldIgnore = [objc_getAssociatedObject(self, &kSnoozeSwitchIgnoreKey) boolValue];
+	
+	if (shouldIgnore) {
+		NSLog(@"[SnoozeSwitchDemo] Detected that we should ignore action for event: %@", event);
+		objc_setAssociatedObject(self, &kSnoozeSwitchIgnoreKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	}
+
+	else {
+		%orig();
 	}
 }
 
