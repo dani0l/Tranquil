@@ -3,7 +3,7 @@
 %hook SBClockDataProvider
 
 - (id)_alarmMessageForNotification:(id)notification withSingleAlarmFormat:(BOOL)singleAlarmFormat {
-	return [NSString stringWithFormat:@"Your fucking alarm set for %@ fucking sucks", [[%orig componentsSeparatedByString:@" "] lastObject]];
+	return [NSString stringWithFormat:@"alarm set for %@", [[%orig componentsSeparatedByString:@" "] lastObject]];
 }
 
 %end
