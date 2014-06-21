@@ -57,20 +57,7 @@
 
 - (NSArray *)sortAlarms:(NSArray *)unsortedAlarms {
 	return [unsortedAlarms sortedArrayUsingComparator:^NSComparisonResult(TRAlarm *firstAlarm, TRAlarm *secondAlarm) {
-		NSDate *firstAlarmFireDate = firstAlarm.nextFireDate, *secondAlarmFireDate = secondAlarm.nextFireDate;
-		NSTimeInterval timeIntervalDifference = [firstAlarmFireDate timeIntervalSince1970] - [secondAlarmFireDate timeIntervalSince1970];
-		
-		if (timeIntervalDifference < 0.5) {
-			return NSOrderedAscending;
-		}
-		
-		else if (timeIntervalDifference > 0.5) {
-			return NSOrderedDescending;
-		}
-		
-		else {
-			return NSOrderedSame;
-		}
+		return [firstAlarm.nextFireDate compare:secondAlarm.nextFireDate];
 	}];
 }
 

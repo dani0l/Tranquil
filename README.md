@@ -1,14 +1,12 @@
 Tranquil
 =======================
+by Julian Weiss and Joshua Tucker.
 
-Serenity in alarms. Control your Alarms intelligently from the notification center. Designed by Joshua Tucker.
+---------------------------------------
 
-Features:
+Serenity in alarms. A breakthrough alarm app for iOS 8. Intelligently create, manage, and live with your alarms. With a clean, pixel-perfect interface, and wide extensibility with iOS (widget and push notifications), you'll never look back again.
 
-1. Shows Alarm cells in the Notification Center for impending alarms
-2. Allows for quick control of Alarms (turning off/on), as well as tapping to launch Clock app
-3. Replaces the "You have an Alarm set for..." text with more informative captions related to visible cells
-4. Adds smart snoozing from Notification Center and Clock app— silencing repeating alarms for just the next repetition
+Currently kept on task by [a shared Google Doc](https://docs.google.com/document/d/1wXbuGpQLJFJAnD-9hAU93FAD8vX8Qq25B1PQ4kLycu8/edit?usp=drive_web).
 
 ---------------------------------------
 [Creative Commons Attribution-NonCommercial 3.0 United States License](http://creativecommons.org/licenses/by-nc/3.0/us/) as of 2014:
