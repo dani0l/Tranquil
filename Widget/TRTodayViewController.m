@@ -1,36 +1,36 @@
 //
-//  TodayViewController.m
+//  TRTodayViewController.m
 //  Widget
 //
 //  Created by Julian Weiss on 6/20/14.
 //  Copyright (c) 2014 insanj. All rights reserved.
 //
 
-#import "TodayViewController.h"
-#import <NotificationCenter/NotificationCenter.h>
+#import "TRTodayViewController.h"
 
-@interface TodayViewController () <NCWidgetProviding>
+@implementation TRTodayViewController
 
-@end
-
-@implementation TodayViewController
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+- (instancetype)init {
+	self = [super init];
+	if (self) {
+		self.view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, [UIScreen mainScreen].bounds.size.width, 180.0)];
+		self.view.backgroundColor = [UIColor redColor];
+	}
 	
-    return self;
+	return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	
+	TRAlarmView *exampleAlarmView = [[TRAlarmView alloc] initWithFrame:self.view.frame];
+	exampleAlarmView.alarm = [[TRAlarm alloc] initWithFireDate:[NSDate date] name:@"Example"];
+	[self.view addSubview:exampleAlarmView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+	
     // Dispose of any resources that can be recreated.
 }
 

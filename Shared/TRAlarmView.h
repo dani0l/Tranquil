@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class TRSwitch;
+#import "TRAlarm.h"
+#import "TRSwitch.h"
 
 @interface TRAlarmView : UIView
+
+@property(nonatomic, retain) TRAlarm *alarm;
 
 // UIKit properties sorted in order of appearance in the standard alarm view (equivalent to Alarm app).
 @property(nonatomic, retain) UILabel *timeLabel, *repeatingDaysLabel;

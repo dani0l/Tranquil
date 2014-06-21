@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E9722501955D95A007CE897 /* TRAlarmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E97224F1955D95A007CE897 /* TRAlarmView.m */; };
-		9E9722571955DA6E007CE897 /* TRAlarmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722561955DA6E007CE897 /* TRAlarmManager.m */; };
-		9E97225A1955DA78007CE897 /* TRAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722591955DA78007CE897 /* TRAlarm.m */; };
-		9E97225D1955DCDD007CE897 /* TRSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E97225C1955DCDD007CE897 /* TRSwitch.m */; };
+		9E0BB0581955EB2B00B70D23 /* TRAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722611955EAB6007CE897 /* TRAlarm.m */; };
+		9E0BB0591955EB2B00B70D23 /* TRAlarmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722631955EAB6007CE897 /* TRAlarmManager.m */; };
+		9E0BB05A1955EB2B00B70D23 /* TRAlarmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722651955EAB6007CE897 /* TRAlarmView.m */; };
+		9E0BB05B1955EB2B00B70D23 /* TRSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722671955EAB6007CE897 /* TRSwitch.m */; };
+		9E9722681955EAB6007CE897 /* TRAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722611955EAB6007CE897 /* TRAlarm.m */; };
+		9E9722691955EAB6007CE897 /* TRAlarmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722631955EAB6007CE897 /* TRAlarmManager.m */; };
+		9E97226A1955EAB6007CE897 /* TRAlarmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722651955EAB6007CE897 /* TRAlarmView.m */; };
+		9E97226B1955EAB6007CE897 /* TRSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9722671955EAB6007CE897 /* TRSwitch.m */; };
 		9EC82B471954CAD3002178B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC82B461954CAD3002178B4 /* main.m */; };
 		9EC82B4A1954CAD3002178B4 /* TRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC82B491954CAD3002178B4 /* TRAppDelegate.m */; };
 		9EC82B4D1954CAD3002178B4 /* TRAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC82B4C1954CAD3002178B4 /* TRAlarmViewController.m */; };
@@ -18,8 +22,7 @@
 		9EC82B551954CAD3002178B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EC82B541954CAD3002178B4 /* Images.xcassets */; };
 		9EC82B611954CAD3002178B4 /* TranquilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC82B601954CAD3002178B4 /* TranquilTests.m */; };
 		9EC82B711954CAF5002178B4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC82B701954CAF5002178B4 /* NotificationCenter.framework */; };
-		9EC82B771954CAF5002178B4 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC82B761954CAF5002178B4 /* TodayViewController.m */; };
-		9EC82B791954CAF5002178B4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EC82B781954CAF5002178B4 /* MainInterface.storyboard */; };
+		9EC82B771954CAF5002178B4 /* TRTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC82B761954CAF5002178B4 /* TRTodayViewController.m */; };
 		9EC82B7C1954CAF5002178B4 /* com.insanj.Tranquil.Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9EC82B6E1954CAF5002178B4 /* com.insanj.Tranquil.Widget.appex */; };
 /* End PBXBuildFile section */
 
@@ -97,14 +100,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9E97224E1955D95A007CE897 /* TRAlarmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TRAlarmView.h; path = Tranquil/TRAlarmView.h; sourceTree = SOURCE_ROOT; };
-		9E97224F1955D95A007CE897 /* TRAlarmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TRAlarmView.m; path = Tranquil/TRAlarmView.m; sourceTree = SOURCE_ROOT; };
-		9E9722551955DA6E007CE897 /* TRAlarmManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAlarmManager.h; sourceTree = "<group>"; };
-		9E9722561955DA6E007CE897 /* TRAlarmManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAlarmManager.m; sourceTree = "<group>"; };
-		9E9722581955DA78007CE897 /* TRAlarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAlarm.h; sourceTree = "<group>"; };
-		9E9722591955DA78007CE897 /* TRAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAlarm.m; sourceTree = "<group>"; };
-		9E97225B1955DCDD007CE897 /* TRSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRSwitch.h; sourceTree = "<group>"; };
-		9E97225C1955DCDD007CE897 /* TRSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRSwitch.m; sourceTree = "<group>"; };
+		9E9722601955EAB6007CE897 /* TRAlarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAlarm.h; sourceTree = "<group>"; };
+		9E9722611955EAB6007CE897 /* TRAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAlarm.m; sourceTree = "<group>"; };
+		9E9722621955EAB6007CE897 /* TRAlarmManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAlarmManager.h; sourceTree = "<group>"; };
+		9E9722631955EAB6007CE897 /* TRAlarmManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAlarmManager.m; sourceTree = "<group>"; };
+		9E9722641955EAB6007CE897 /* TRAlarmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAlarmView.h; sourceTree = "<group>"; };
+		9E9722651955EAB6007CE897 /* TRAlarmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAlarmView.m; sourceTree = "<group>"; };
+		9E9722661955EAB6007CE897 /* TRSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRSwitch.h; sourceTree = "<group>"; };
+		9E9722671955EAB6007CE897 /* TRSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRSwitch.m; sourceTree = "<group>"; };
 		9EC82B411954CAD3002178B4 /* Tranquil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tranquil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC82B451954CAD3002178B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EC82B461954CAD3002178B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -121,9 +124,8 @@
 		9EC82B6E1954CAF5002178B4 /* com.insanj.Tranquil.Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = com.insanj.Tranquil.Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC82B701954CAF5002178B4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		9EC82B741954CAF5002178B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9EC82B751954CAF5002178B4 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
-		9EC82B761954CAF5002178B4 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
-		9EC82B781954CAF5002178B4 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		9EC82B751954CAF5002178B4 /* TRTodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRTodayViewController.h; sourceTree = "<group>"; };
+		9EC82B761954CAF5002178B4 /* TRTodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRTodayViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,9 +154,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E97225F1955EAB6007CE897 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9E9722601955EAB6007CE897 /* TRAlarm.h */,
+				9E9722611955EAB6007CE897 /* TRAlarm.m */,
+				9E9722621955EAB6007CE897 /* TRAlarmManager.h */,
+				9E9722631955EAB6007CE897 /* TRAlarmManager.m */,
+				9E9722641955EAB6007CE897 /* TRAlarmView.h */,
+				9E9722651955EAB6007CE897 /* TRAlarmView.m */,
+				9E9722661955EAB6007CE897 /* TRSwitch.h */,
+				9E9722671955EAB6007CE897 /* TRSwitch.m */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		9EC82B381954CAD3002178B4 = {
 			isa = PBXGroup;
 			children = (
+				9E97225F1955EAB6007CE897 /* Shared */,
 				9EC82B431954CAD3002178B4 /* Tranquil */,
 				9EC82B721954CAF5002178B4 /* Widget */,
 				9EC82B5D1954CAD3002178B4 /* TranquilTests */,
@@ -182,14 +200,6 @@
 				9EC82B4C1954CAD3002178B4 /* TRAlarmViewController.m */,
 				9EC82B4E1954CAD3002178B4 /* TREditAlarmViewController.h */,
 				9EC82B4F1954CAD3002178B4 /* TREdiAlarmViewController.m */,
-				9E97225B1955DCDD007CE897 /* TRSwitch.h */,
-				9E97225C1955DCDD007CE897 /* TRSwitch.m */,
-				9E97224E1955D95A007CE897 /* TRAlarmView.h */,
-				9E97224F1955D95A007CE897 /* TRAlarmView.m */,
-				9E9722551955DA6E007CE897 /* TRAlarmManager.h */,
-				9E9722561955DA6E007CE897 /* TRAlarmManager.m */,
-				9E9722581955DA78007CE897 /* TRAlarm.h */,
-				9E9722591955DA78007CE897 /* TRAlarm.m */,
 				9EC82B541954CAD3002178B4 /* Images.xcassets */,
 				9EC82B441954CAD3002178B4 /* Supporting Files */,
 			);
@@ -233,9 +243,8 @@
 		9EC82B721954CAF5002178B4 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				9EC82B751954CAF5002178B4 /* TodayViewController.h */,
-				9EC82B761954CAF5002178B4 /* TodayViewController.m */,
-				9EC82B781954CAF5002178B4 /* MainInterface.storyboard */,
+				9EC82B751954CAF5002178B4 /* TRTodayViewController.h */,
+				9EC82B761954CAF5002178B4 /* TRTodayViewController.m */,
 				9EC82B731954CAF5002178B4 /* Supporting Files */,
 			);
 			path = Widget;
@@ -373,7 +382,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EC82B791954CAF5002178B4 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,13 +392,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E9722681955EAB6007CE897 /* TRAlarm.m in Sources */,
 				9EC82B4A1954CAD3002178B4 /* TRAppDelegate.m in Sources */,
-				9E97225A1955DA78007CE897 /* TRAlarm.m in Sources */,
-				9E97225D1955DCDD007CE897 /* TRSwitch.m in Sources */,
 				9EC82B4D1954CAD3002178B4 /* TRAlarmViewController.m in Sources */,
+				9E9722691955EAB6007CE897 /* TRAlarmManager.m in Sources */,
 				9EC82B471954CAD3002178B4 /* main.m in Sources */,
+				9E97226B1955EAB6007CE897 /* TRSwitch.m in Sources */,
+				9E97226A1955EAB6007CE897 /* TRAlarmView.m in Sources */,
 				9EC82B501954CAD3002178B4 /* TREdiAlarmViewController.m in Sources */,
-				9E9722571955DA6E007CE897 /* TRAlarmManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,8 +415,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E9722501955D95A007CE897 /* TRAlarmView.m in Sources */,
-				9EC82B771954CAF5002178B4 /* TodayViewController.m in Sources */,
+				9E0BB0581955EB2B00B70D23 /* TRAlarm.m in Sources */,
+				9E0BB0591955EB2B00B70D23 /* TRAlarmManager.m in Sources */,
+				9E0BB05A1955EB2B00B70D23 /* TRAlarmView.m in Sources */,
+				9E0BB05B1955EB2B00B70D23 /* TRSwitch.m in Sources */,
+				9EC82B771954CAF5002178B4 /* TRTodayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

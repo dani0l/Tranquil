@@ -17,6 +17,7 @@
 	
 	if (self) {
 		_alarmManager = [TRAlarmManager sharedManager];
+		_alarmsDataSource = [[NSMutableArray alloc] initWithArray:_alarmManager.alarms];
 	}
 	
 	return self;
@@ -39,10 +40,8 @@
 #pragma mark - actions
 
 - (void)insertNewObject:(id)sender {
-	if (!self.objects) {
-	    self.objects = [[NSMutableArray alloc] init];
-	}
-	[self.objects insertObject:[NSDate date] atIndex:0];
+	[_alarmsDataSource insertObject:[[TRAlarm alloc] init] atIndex:0];
+	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -55,38 +54,53 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return self.objects.count;
+	return _alarmsDataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TranquilCell" forIndexPath:indexPath];
 
-	NSDate *object = self.objects[indexPath.row];
-	cell.textLabel.text = [object description];
+	TRAlarmView *alarmView = (TRAlarmView *)[cell viewWithTag:1];
+	if (!alarmView) {
+		alarmView = [[TRAlarmView alloc] initWithFrame:cell.frame];
+		alarmView.tag = 1;
+		
+		[cell addSubview:alarmView];
+	}
+	
+	alarmView.alarm = _alarmsDataSource[indexPath.row];
+	
 	return cell;
 }
 
 #pragma mark delegate
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-	// Return NO if you do not want the specified item to be editable.
 	return YES;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
-	    [self.objects removeObjectAtIndex:indexPath.row];
+		TRAlarm *alarmToBeRemoved = [_alarmsDataSource objectAtIndex:indexPath.row];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"Tranquil.Remove" object:nil userInfo:@{@"alarm" : alarmToBeRemoved}];
+		
+		[_alarmsDataSource removeObject:alarmToBeRemoved];
 	    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	} else if (editingStyle == UITableViewCellEditingStyleInsert) {
+	}
+	
+	else if (editingStyle == UITableViewCellEditingStyleInsert) {
 	    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
 	}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+	/*if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 	    NSDate *object = self.objects[indexPath.row];
 	    self.detailViewController.detailItem = object;
-	}
+	}*/
 }
 
 @end

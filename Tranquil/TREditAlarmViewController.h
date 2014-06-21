@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  TREditAlarmViewController.h
 //  Tranquil
 //
 //  Created by Julian Weiss on 6/20/14.
@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface TREditAlarmViewController : UIViewController // <UISplitViewControllerDelegate>
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+
+@property (strong, nonatomic) UIPopoverController *masterPopoverController;
 
 @end
 

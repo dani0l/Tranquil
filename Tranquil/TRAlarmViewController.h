@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class TREditAlarmViewController, TRAlarmView, TRAlarmManager, TRAlarm;
+#import "TREditAlarmViewController.h"
+#import "TRAlarmView.h"
+#import "TRAlarmManager.h"
+#import "TRAlarm.h"
 
 @interface TRAlarmViewController : UITableViewController
 
@@ -16,6 +19,8 @@
  *  A static reference to the current alarm manager. Should hear and refresh to updates maybe anywhere (through notification), although the table view itself will need to be manually refreshed afterwards to update visually.
  */
 @property(nonatomic, retain) TRAlarmManager *alarmManager;
+
+@property(nonatomic, retain) NSMutableArray *alarmsDataSource;
 
 @end
 

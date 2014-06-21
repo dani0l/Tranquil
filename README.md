@@ -4,7 +4,7 @@ by Julian Weiss and Joshua Tucker.
 
 ---------------------------------------
 
-Serenity in alarms. A breakthrough alarm app for iOS 8. Intelligently create, manage, and live with your alarms. With a clean, pixel-perfect interface, and wide extensibility with iOS (widget and push notifications), you'll never look back again.
+[Serenity](http://dribbble.com/shots/1287839-Alarm-Notification-Center-iOS-7?list=show) in alarms. A breakthrough alarm app for iOS 8. Intelligently create, manage, and live with your alarms. With a clean, pixel-perfect interface, and wide extensibility with iOS (widget and push notifications), you'll never look back again.
 
 Currently kept on task by [a shared Google Doc](https://docs.google.com/document/d/1wXbuGpQLJFJAnD-9hAU93FAD8vX8Qq25B1PQ4kLycu8/edit?usp=drive_web).
 

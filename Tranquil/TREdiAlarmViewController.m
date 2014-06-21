@@ -1,20 +1,14 @@
 //
-//  DetailViewController.m
+//  TREditAlarmViewController.m
 //  Tranquil
 //
 //  Created by Julian Weiss on 6/20/14.
 //  Copyright (c) 2014 insanj. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "TREditAlarmViewController.h"
 
-@interface DetailViewController ()
-            
-@property (strong, nonatomic) UIPopoverController *masterPopoverController;
-
-@end
-
-@implementation DetailViewController
+@implementation TREditAlarmViewController
             
 #pragma mark - Managing the detail item
 
